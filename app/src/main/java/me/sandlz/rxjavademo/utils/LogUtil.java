@@ -46,9 +46,9 @@ public class LogUtil {
             Logger.d(TAG, msg);
     }
 
-    public static void d(@NonNull String tag, Object msg) {
+    public static void d(Object tag, @NonNull String msg) {
         if (isDebug)
-            Logger.d(tag, msg);
+            Logger.d(msg, tag);
     }
 
     // error
