@@ -35,7 +35,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 public class RetrofitManager {
     private static OkHttpClient okHttpClient = null;
     private static Retrofit retrofit = null;
-    private static final String BASE_URL = "http://dev.handsmap.cn:6880/sims_lushan/rest/v1/";
+    private static final String BASE_URL = "";
     public static RetrofitManager getInstance() {
         return SingletonHolder.INSTANCE;
     }

@@ -17,7 +17,7 @@ import butterknife.Bind;
 import butterknife.OnClick;
 import me.sandlz.rxjavademo.R;
 import me.sandlz.rxjavademo.core.mvp.MvpActivity;
-import me.sandlz.rxjavademo.modules.Starter.view.StarterActivity;
+import me.sandlz.rxjavademo.modules.starter.view.StarterActivity;
 import me.sandlz.rxjavademo.modules.login.presenter.LoginPresenter;
 import rx.Observable;
 import rx.Subscriber;
