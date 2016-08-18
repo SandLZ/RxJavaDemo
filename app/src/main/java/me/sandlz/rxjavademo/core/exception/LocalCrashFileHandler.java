@@ -45,7 +45,6 @@ public class LocalCrashFileHandler extends BaseExceptionHandler {
 
         //保存错误日志
         saveLog(ex);
-
         return true;
     }
 
@@ -57,7 +56,7 @@ public class LocalCrashFileHandler extends BaseExceptionHandler {
     private void saveLog(Throwable ex) {
         try {
 
-            File path = new File(FileUtil.getDiskCacheDir(context) + "/RxJavaDemo/log");
+            File path = new File(FileUtil.getDiskCacheDir(context) + "/RxJava/crash");
             if (!path.exists()) {
                 path.mkdirs();
             }

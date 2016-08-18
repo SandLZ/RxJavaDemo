@@ -1,11 +1,14 @@
 package me.sandlz.rxjavademo.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Environment;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -14,6 +17,120 @@ import java.io.InputStream;
  * Usage :
  */
 public class FileUtil {
+
+    /**
+     * 获取SDCARD 根目录
+     * @return
+     */
+    public static String getRootPath() {
+        return Environment.getExternalStorageDirectory() + "/";
+    }
+
+    public static void initFileDir(String path) {
+        File file = new File(path);
+        if (!isFileExists(path)) {
+            file.mkdir();
+        }
+    }
+
+    /**
+     * 文件是否存在
+     * @param path
+     * @return
+     */
+    public static boolean isFileExists(String path) {
+        if (null != path) {
+            File file = new File(path);
+            if (file.exists()) {
+                return true;
+            }else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 拷贝Assets文件至SD卡
+     */
+    public static void copyAssetsToFile(String assetDirectory, String destination, Resources res) {
+        if(res != null) {
+            String[] files;
+            try {
+                files = res.getAssets().list(assetDirectory);
+            } catch (IOException var12) {
+                return;
+            }
+
+            File mWorkingPath = new File(destination);
+            if(!mWorkingPath.exists() && !mWorkingPath.mkdirs()) {
+                ;
+            }
+
+            for(int i = 0; i < files.length; ++i) {
+                try {
+                    String e = files[i];
+                    if(!e.contains(".")) {
+                        if(0 == assetDirectory.length()) {
+                            copyAssetsToFile(e, destination + e + "/", res);
+                        } else {
+                            copyAssetsToFile(assetDirectory + "/" + e, destination + e + "/", res);
+                        }
+                    } else {
+                        File outFile = new File(mWorkingPath, e);
+                        if(outFile.exists()) {
+                            outFile.delete();
+                        }
+
+                        InputStream in = null;
+                        if(0 != assetDirectory.length()) {
+                            in = res.getAssets().open(assetDirectory + "/" + e);
+                        } else {
+                            in = res.getAssets().open(e);
+                        }
+
+                        FileOutputStream out = new FileOutputStream(outFile);
+                        byte[] buf = new byte[1024];
+
+                        int len;
+                        while((len = in.read(buf)) > 0) {
+                            out.write(buf, 0, len);
+                        }
+
+                        in.close();
+                        out.close();
+                    }
+                } catch (FileNotFoundException var13) {
+                    var13.printStackTrace();
+                } catch (IOException var14) {
+                    var14.printStackTrace();
+                }
+            }
+
+        }
+    }
+
+    /**
+     * 依据字符串资源ID获取资源字符串
+     *
+     * @param StrId
+     * @param pContext
+     * @return
+     */
+    public static String getResString(int StrId, Context pContext) {
+        String pStr = "";
+        try {
+            pStr = pContext.getResources().getString(StrId);
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return pStr;
+    }
+
+
+
+
     /**
      * 在指定的位置创建指定的文件
      *

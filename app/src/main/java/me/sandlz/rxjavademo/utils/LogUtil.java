@@ -30,58 +30,61 @@ public class LogUtil {
      */
 
     // info
-    public static void i(Object msg) {
+    public static void i(String msg) {
         if (isDebug)
-            Logger.i(TAG, msg);
+            Logger.i(msg);
     }
-
-    public static void i(@NonNull String tag, Object msg) {
+    public static void i(@NonNull String tag, @NonNull String msg) {
         if (isDebug)
-            Logger.i(tag, msg);
+            Logger.log(Logger.INFO,tag,msg,(Throwable)null);
     }
 
     // debug
     public static void d(String msg) {
         if (isDebug)
-            Logger.d(TAG, msg);
+            Logger.d(msg);
+    }
+    public static void d(Object msg) {
+        if (isDebug)
+            Logger.d(msg);
     }
 
-    public static void d(Object tag, @NonNull String msg) {
+    public static void d(@NonNull String tag, @NonNull String msg) {
         if (isDebug)
-            Logger.d(msg, tag);
+            Logger.log(Logger.DEBUG,tag,msg,(Throwable)null);
     }
 
     // error
-    public static void e(Object msg) {
+    public static void e(String msg) {
         if (isDebug)
-            Logger.e(TAG, msg);
+            Logger.e(msg);
     }
 
-    public static void e(@NonNull String tag, Object msg) {
+    public static void e(@NonNull String tag, @NonNull String msg) {
         if (isDebug)
-            Logger.e(tag, msg);
+            Logger.log(Logger.ERROR,tag,msg,(Throwable)null);
     }
 
     // verbose
-    public static void v(Object msg) {
+    public static void v(String msg) {
         if (isDebug)
-            Logger.v(TAG, msg);
+            Logger.v(msg);
     }
 
-    public static void v(@NonNull String tag, Object msg) {
+    public static void v(@NonNull String tag, @NonNull String msg) {
         if (isDebug)
-            Logger.v(tag, msg);
+            Logger.log(Logger.VERBOSE,tag,msg,(Throwable)null);
     }
 
     // warning
     public static void w(String msg) {
         if (isDebug)
-            Logger.w(TAG, msg);
+            Logger.w(msg);
     }
 
-    public static void w(@NonNull String tag, Object msg) {
+    public static void w(@NonNull String tag, @NonNull String msg) {
         if (isDebug)
-            Logger.w(tag, msg);
+            Logger.log(Logger.WARN,tag,msg,(Throwable)null);
     }
 
     public static void json(String json) {
